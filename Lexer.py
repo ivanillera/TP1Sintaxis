@@ -1,3 +1,21 @@
+TRAMPA = -1
+RESULTADO_ACEPTADO = "ACEPTADO"
+RESULTADO_TRAMPA = "TRAMPA"
+RESULTADO_NO_ACEPTADO = "NO_ACEPTADO"
+
+
+###########################################################
+#AUTOMATAS A_ALGO() D_ALGO()
+###########################################################
+
+
+
+
+
+
+
+
+	
 ###########################################################
 #Lo de abajo es necesario para este codigo
 #Uso esto para encontrar ESTADO TRAMPA cuando hay un espacio
@@ -11,16 +29,13 @@ for x in range(97,123):
 for x in range(65,91):
 	Letras.append(chr(x))
 
-
-
-
 def Letra(caracter):
-	if not caracter in Letras or len(caracter) == 0: #Un "" no cuenta como letra.
+	if not caracter in Letras or len(caracter) == 0:
 		return RESULTADO_TRAMPA
 	return RESULTADO_ACEPTADO
 	
 def Digito(caracter):
-	if not caracter in Digitos or len(caracter) == 0:  #Un "" no cuenta como numero.
+	if not caracter in Digitos or len(caracter) == 0:  
 		return RESULTADO_TRAMPA
 	return RESULTADO_ACEPTADO
 
@@ -35,22 +50,16 @@ def ListaSimbolos(cadena):
 
 ###########################################################
 #las 2 funciones de abajo son para no repetir el codigo en la funcion lexer(cadena)
-#
-#
-#Es necesario que los a_etcetera(cadena) esten en este mismo codigo para que esto funcione
-#Tambien es necesario completar los a_etcetera(cadena) == TRAMPA/ACEPTADO aca abajo para completar el lexer
-#
-#
 ###########################################################
 
-#Es necesario para saber si llegue a un estado de RESULTADO_TRAMPA en todas las posibilidades de la cadena
+#Es necesario para saber si llegue a un estado de TRAMPA en todas las posibilidades de la cadena
 def TodoTrampa(cadena): 
 	if(a_eof(cadena) == RESULTADO_TRAMPA and
 		a_if(cadena) == RESULTADO_TRAMPA and
-		a_else(cadena) == TRAMPA and
+		a_else(cadena) == RESULTADO_TRAMPA and
 		##########mas automatas a agregar
 		
-		ListaSimbolos(cadena) == TRAMPA):
+		ListaSimbolos(cadena) == RESULTADO_TRAMPA):
 			return True
       
 def TipoCadena(cadena):
@@ -60,10 +69,10 @@ def TipoCadena(cadena):
 		tipo = "_IF"
 	elif a_else(cadena) == RESULTADO_ACEPTADO:
 		tipo = "_ELSE"
-	#########mas automatas a agregar
+	#########mas automatas a agregar junto con su tipo
 	
 	else:
-		tipo = "ID"
+		tipo = "TIPO"
 	
 	return tipo
 
