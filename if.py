@@ -1,29 +1,43 @@
-ESTADO_TRAMPA = -1
+TRAMPA = -1
+RESULTADO_ACEPTADO = "ACEPTADO"
+RESULTADO_TRAMPA = "TRAMPA"
+RESULTADO_NO_ACEPTADO = "NO_ACEPTADO"
 
-ACEPTADO = "aceptado"
-ERROR = "error"
-TRAMPA = "trampa"
 
+#delta eof
+def d_if(estado_anterior, caracter):
+    if estado_anterior == 0 and caracter == "i":
+        return 1
+    if estado_anterior == 1 and caracter == "f":
+        return 2
+    return TRAMPA
 
+#automata eof
 def a_if(cadena):
-    aceptados = [2]
-    estado = 0
-    for c in cadena:
-        if estado == 0 and c == 'i':
-            estado = 1
-        elif estado == 1 and c == 'f':
-            estado = 2
-        else:
-            estado = ESTADO_TRAMPA
-            break
+    Finales = [3]
+    estado_actual = 0
 
-    if estado in aceptados:
-        return ACEPTADO
-    if estado == ESTADO_TRAMPA:
-        return TRAMPA
-    return ERROR
+    for caracter in cadena:
+        estado_proximo = d_if(estado_actual, caracter)
+        if estado_proximo == TRAMPA:
+            return RESULTADO_TRAMPA
+        estado_actual = estado_proximo
+    
+    if estado_actual in Finales:
+        return RESULTADO_ACEPTADO
+    else:
+        return RESULTADO_NO_ACEPTADO
 
+## PRUEBAS
 
-assert(a_if("if") == ACEPTADO)
-assert(a_if("i") == ERROR)
-assert(a_if("j") == TRAMPA)
+casos = [
+    ("if", RESULTADO_ACEPTADO),
+    ("i", RESULTADO_NO_ACEPTADO),
+    ("f", RESULTADO_TRAMPA),
+    ("if  ", RESULTADO_TRAMPA),
+    ("1if", RESULTADO_TRAMPA)
+]
+
+for cadena, resultado in casos:
+    print((cadena, a_if(cadena)))
+    assert a_if(cadena) == resultado
