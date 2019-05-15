@@ -11,15 +11,18 @@ for x in range(97,123):
 for x in range(65,91):
 	Letras.append(chr(x))
 
+
+
+
 def Letra(caracter):
-	if not caracter in Letras or len(caracter) == 0:
+	if not caracter in Letras or len(caracter) == 0: #Un "" no cuenta como letra.
 		return TRAMPA
-	return ACEPTADO
+	return RESULTADO_ACEPTADO
 	
 def Digito(caracter):
-	if not caracter in Digitos or len(caracter) == 0:  
+	if not caracter in Digitos or len(caracter) == 0:  #Un "" no cuenta como numero.
 		return TRAMPA
-	return ACEPTADO
+	return RESULTADO_ACEPTADO
 
 def ListaSimbolos(cadena):
 	for caracter in cadena:
@@ -27,7 +30,7 @@ def ListaSimbolos(cadena):
 			return TRAMPA
 	if len(cadena) == 0:
 		return TRAMPA
-	return ACEPTADO
+	return RESULTADO_ACEPTADO
 
 
 ###########################################################
@@ -51,11 +54,11 @@ def TodoTrampa(cadena):
 			return True
       
 def TipoCadena(cadena):
-	if a_eof(cadena) == ACEPTADO:
+	if a_eof(cadena) == RESULTADO_ACEPTADO:
 		tipo = "_EOF"
-	elif a_if(cadena) == ACEPTADO:
+	elif a_if(cadena) == RESULTADO_ACEPTADO:
 		tipo = "_IF"
-	elif a_else(cadena) == ACEPTADO:
+	elif a_else(cadena) == RESULTADO_ACEPTADO:
 		tipo = "_ELSE"
 	#########mas automatas a agregar
 	
