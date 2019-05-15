@@ -5,7 +5,7 @@ ERROR = "error"
 TRAMPA = "trampa"
 
 
-def _IF(cadena):
+def a_if(cadena):
     aceptados = [2]
     estado = 0
     for c in cadena:
@@ -24,6 +24,6 @@ def _IF(cadena):
     return ERROR
 
 
-print(_IF("if") == ACEPTADO)
-print(_IF("i") == ERROR)
-print(_IF("j") == TRAMPA)
+assert(a_if("if") == ACEPTADO)
+assert(a_if("i") == ERROR)
+assert(a_if("j") == TRAMPA)
