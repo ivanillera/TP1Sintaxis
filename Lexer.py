@@ -16,20 +16,20 @@ for x in range(65,91):
 
 def Letra(caracter):
 	if not caracter in Letras or len(caracter) == 0: #Un "" no cuenta como letra.
-		return TRAMPA
+		return RESULTADO_TRAMPA
 	return RESULTADO_ACEPTADO
 	
 def Digito(caracter):
 	if not caracter in Digitos or len(caracter) == 0:  #Un "" no cuenta como numero.
-		return TRAMPA
+		return RESULTADO_TRAMPA
 	return RESULTADO_ACEPTADO
 
 def ListaSimbolos(cadena):
 	for caracter in cadena:
-		if Letra(caracter) == TRAMPA and Digito(caracter) == TRAMPA:
-			return TRAMPA
+		if Letra(caracter) == RESULTADO_TRAMPA and Digito(caracter) == RESULTADO_TRAMPA:
+			return RESULTADO_TRAMPA
 	if len(cadena) == 0:
-		return TRAMPA
+		return RESULTADO_TRAMPA
 	return RESULTADO_ACEPTADO
 
 
@@ -43,10 +43,10 @@ def ListaSimbolos(cadena):
 #
 ###########################################################
 
-#Es necesario para saber si llegue a un estado de TRAMPA en todas las posibilidades de la cadena
+#Es necesario para saber si llegue a un estado de RESULTADO_TRAMPA en todas las posibilidades de la cadena
 def TodoTrampa(cadena): 
-	if(a_eof(cadena) == TRAMPA and
-		a_if(cadena) == TRAMPA and
+	if(a_eof(cadena) == RESULTADO_TRAMPA and
+		a_if(cadena) == RESULTADO_TRAMPA and
 		a_else(cadena) == TRAMPA and
 		##########mas automatas a agregar
 		
