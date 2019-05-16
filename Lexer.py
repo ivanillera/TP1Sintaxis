@@ -65,17 +65,16 @@ def TodoTrampa(cadena):
       
 def TipoCadena(cadena):
 	if a_eof(cadena) == RESULTADO_ACEPTADO:
-		tipo = "_EOF"
+		return "_EOF"
 	elif a_if(cadena) == RESULTADO_ACEPTADO:
-		tipo = "_IF"
+		return "_IF"
 	elif a_else(cadena) == RESULTADO_ACEPTADO:
-		tipo = "_ELSE"
+		return "_ELSE"
 	#########mas automatas a agregar junto con su tipo
 	
 	else:
-		tipo = "TIPO"
-	
-	return tipo
+		return "TIPO"
+
 
 
 ###################################
