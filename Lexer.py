@@ -18,7 +18,8 @@ RESULTADO_NO_ACEPTADO = "NO_ACEPTADO"
 	
 ###########################################################
 #Lo de abajo es necesario para este codigo
-#Uso esto para encontrar ESTADO TRAMPA cuando hay un espacio
+#Uso esto para encontrar ESTADO TRAMPA cuando no se encuentran ni digitos ni letras. 
+#(Creo que no debemos buscar " " para reconocer palabras porque no seria el objetivo del tp)
 ###########################################################
 
 Digitos = ["0","1","2","3","4","5","6","7","8","9"]
@@ -79,30 +80,34 @@ def TipoCadena(cadena):
 
 ###################################
 #Lexer: voy agarrando elementos de la cadena hasta llegar a un estado trampa.
-#Luego volviendo al estado anterior de la cadena, elijo su tipo(if, nombre de variable/texto) segun su prioridad
+#Luego del estado trampa tomo la cadena antes de llegar al estado trampa, examino lo que tengo y devuelvo una lista con: (tipo, cosa leida).
 ###################################
 
 
 def lexer(cadena):
 	token = []
-	tipo = "ID"
+	tipo = ""
 	primerElemento = 0
 	ultimoElemento = 0
 	
+	#Repetimos esto hasta leer toda la cadena
 	while ultimoElemento != len(cadena):
 		ultimoElemento += 1
 		subcadena = cadena[primerElemento:ultimoElemento]
 		
+		#examino si lo que leo es trampa en todos los automatas
 		if TodoTrampa(subcadena):
-				
+			#al ser todo trampa, examino lo que es por prioridad, dsp guardo lo leido y su tipo en una lista
 			subcadena = cadena[primerElemento:ultimoElemento-1]
 			tipo = TipoCadena(subcadena)
-
 			token.append((tipo,subcadena))
+			
 			primerElemento = ultimoElemento 
 				
+		#Esto es lo mismo que arriba porque por alguna razon no pude hacer que la ultma palabra sea examinada por el algoritmo anterior, asi que lo hago aca
 		if ultimoElemento == len(cadena):
 			tipo = TipoCadena(subcadena)
 			token.append((tipo,subcadena))
+
 	#return token
 	print(token)
