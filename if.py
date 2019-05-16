@@ -4,7 +4,7 @@ RESULTADO_TRAMPA = "TRAMPA"
 RESULTADO_NO_ACEPTADO = "NO_ACEPTADO"
 
 
-#delta eof
+#delta if
 def d_if(estado_anterior, caracter):
     if estado_anterior == 0 and caracter == "i":
         return 1
@@ -12,9 +12,9 @@ def d_if(estado_anterior, caracter):
         return 2
     return TRAMPA
 
-#automata eof
+#automata if
 def a_if(cadena):
-    Finales = [3]
+    Finales = [2]
     estado_actual = 0
 
     for caracter in cadena:
