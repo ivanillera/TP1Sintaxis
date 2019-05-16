@@ -53,7 +53,7 @@ def ListaSimbolos(cadena):
 #las 2 funciones de abajo son para no repetir el codigo en la funcion lexer(cadena)
 ###########################################################
 
-#Es necesario para saber si llegue a un estado de TRAMPA en todas las posibilidades de la cadena
+#Este es necesario para saber si llegue a un estado de TODO TRAMPA en la cadena introducida
 def TodoTrampa(cadena): 
 	if(a_eof(cadena) == RESULTADO_TRAMPA and
 		a_if(cadena) == RESULTADO_TRAMPA and
@@ -62,7 +62,8 @@ def TodoTrampa(cadena):
 		
 		ListaSimbolos(cadena) == RESULTADO_TRAMPA):
 			return True
-      
+
+#Este es para retornar el tipo de cadena segun prioridad
 def TipoCadena(cadena):
 	if a_eof(cadena) == RESULTADO_ACEPTADO:
 		return "_EOF"
@@ -71,7 +72,7 @@ def TipoCadena(cadena):
 	elif a_else(cadena) == RESULTADO_ACEPTADO:
 		return "_ELSE"
 	#########mas automatas a agregar junto con su tipo
-	
+
 	else:
 		return "TIPO"
 
