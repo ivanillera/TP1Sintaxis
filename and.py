@@ -16,7 +16,7 @@ def d_and(estado_anterior, caracter):
 
 #automata and
 def a_and(cadena):
-    Finales = [2]
+    Finales = [3]
     estado_actual = 0
 
     for caracter in cadena:
