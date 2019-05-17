@@ -4,13 +4,13 @@ RESULTADO_TRAMPA = "TRAMPA"
 RESULTADO_NO_ACEPTADO = "NO_ACEPTADO"
 
 
-#delta bigger
+#delta ">"
 def d_bigger(estado_anterior, caracter):
     if estado_anterior == 0 and caracter == ">":
         return 1   
     return TRAMPA
 
-#automata bigger
+#automata ">"
 def a_bigger(cadena):
     Finales = [2]
     estado_actual = 0
