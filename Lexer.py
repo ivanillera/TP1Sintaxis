@@ -380,6 +380,40 @@ def a_eof(cadena):
 	else:
 		return RESULTADO_NO_ACEPTADO
 
+def d_equal(estado_anterior, caracter):
+	if estado_anterior == 0 and caracter == "=":
+		return 1
+	if estado_anterior == 1 and caracter == "=":
+		return 2
+
+	
+	return TRAMPA
+
+#delta egual
+def d_equal(estado_anterior, caracter):
+	if estado_anterior == 0 and caracter == "=":
+		return 1
+	if estado_anterior == 1 and caracter == "=":
+		return 2
+
+	
+	return TRAMPA
+
+#automata egual
+def a_equal(cadena):
+	Finales = [2]
+	estado_actual = 0
+
+	for caracter in cadena:
+		estado_proximo = d_equal(estado_actual, caracter)
+		if estado_proximo == TRAMPA:
+			return RESULTADO_TRAMPA
+		estado_actual = estado_proximo
+	
+	if estado_actual in Finales:
+		return RESULTADO_ACEPTADO
+	else:
+		return RESULTADO_NO_ACEPTADO
 
 #delta exclamation
 def d_exclamation(estado_anterior, caracter):
@@ -387,6 +421,7 @@ def d_exclamation(estado_anterior, caracter):
 		return 1
 	
 	return RESULTADO_TRAMPA
+
 
 #automata exclamation
 def a_exclamation(cadena):
