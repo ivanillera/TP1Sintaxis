@@ -12,7 +12,7 @@ def d_smaller(estado_anterior, caracter):
 
 #automata smaller
 def a_smaller(cadena):
-    Finales = [2]
+    Finales = [1]
     estado_actual = 0
 
     for caracter in cadena:
@@ -30,10 +30,10 @@ def a_smaller(cadena):
 
 casos = [
     ("<", RESULTADO_ACEPTADO),
-    ("<.", RESULTADO_NO_ACEPTADO),
-    ("b", RESULTADO_TRAMPA),
-    ("5", RESULTADO_TRAMPA),
-    ("< ", RESULTADO_TRAMPA)
+    ("", RESULTADO_NO_ACEPTADO),
+    (",", RESULTADO_TRAMPA),
+    (";", RESULTADO_TRAMPA),
+    ("a;", RESULTADO_TRAMPA)
 ]
 
 for cadena, resultado in casos:
