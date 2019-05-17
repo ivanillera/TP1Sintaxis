@@ -3,10 +3,18 @@ RESULTADO_ACEPTADO = "ACEPTADO"
 RESULTADO_TRAMPA = "TRAMPA"
 RESULTADO_NO_ACEPTADO = "NO_ACEPTADO"
 
+###################################################################################
+#Abajo de todo estan las pruebas. Parece que las funciones deben escribirse arriba
+#Claro, a menos que importemos este Lexer.py a otro archivo y pongamos las pruebas en ese otro archivo
+###################################################################################
+
+
+
+
 
 ###########################################################
 #Lo de abajo es necesario para este codigo
-#Uso esto para encontrar ESTADO TRAMPA cuando no se encuentran ni digitos ni letras. 
+#Uso esto para encontrar ESTADO RESULTADO_TRAMPA cuando no se encuentran ni digitos ni letras. 
 #(Creo que no debemos buscar " " para reconocer palabras porque no seria el objetivo del tp)
 ###########################################################
 
@@ -15,8 +23,10 @@ Digitos = ["0","1","2","3","4","5","6","7","8","9"]
 Letras = []
 for x in range(97,123):
 	Letras.append(chr(x))
+	Letras.append("ñ")
 for x in range(65,91):
 	Letras.append(chr(x))
+	Letras.append("Ñ")
 
 def Letra(caracter):
 	if not caracter in Letras or len(caracter) == 0:
@@ -41,13 +51,39 @@ def ListaSimbolos(cadena):
 #las 2 funciones de abajo son para no repetir el codigo en la funcion lexer(cadena)
 ###########################################################
 
-#Este es necesario para saber si llegue a un estado de TODO TRAMPA en la cadena introducida
+#Este es necesario para saber si llegue a un estado de TODO RESULTADO_TRAMPA en la cadena introducida
 def TodoTrampa(cadena): 
 	if(a_eof(cadena) == RESULTADO_TRAMPA and
 		a_if(cadena) == RESULTADO_TRAMPA and
 		a_else(cadena) == RESULTADO_TRAMPA and
-		##########mas automatas a agregar
-		
+		a_parclose(cadena) == RESULTADO_TRAMPA and
+		a_paropen(cadena) == RESULTADO_TRAMPA and
+		a_comma(cadena) == RESULTADO_TRAMPA and
+		a_var(cadena) == RESULTADO_TRAMPA and
+		a_semicolon(cadena) == RESULTADO_TRAMPA and
+		a_igual(cadena) == RESULTADO_TRAMPA and
+		a_for(cadena) == RESULTADO_TRAMPA and
+		a_return(cadena) == RESULTADO_TRAMPA and
+		a_while(cadena) == RESULTADO_TRAMPA and
+		a_braopen(cadena) == RESULTADO_TRAMPA and
+		a_braclose(cadena) == RESULTADO_TRAMPA and
+		a_or(cadena) == RESULTADO_TRAMPA and
+		a_and(cadena) == RESULTADO_TRAMPA and
+		a_equal(cadena) == RESULTADO_TRAMPA and
+		a_different(cadena) == RESULTADO_TRAMPA and
+		a_bigger(cadena) == RESULTADO_TRAMPA and
+		a_smaller(cadena) == RESULTADO_TRAMPA and
+		a_smallorequal(cadena) == RESULTADO_TRAMPA and
+		a_bigorequal(cadena) == RESULTADO_TRAMPA and
+		a_guion(cadena) == RESULTADO_TRAMPA and
+		a_plus(cadena) == RESULTADO_TRAMPA and
+		a_slash(cadena) == RESULTADO_TRAMPA and
+		a_asterisk(cadena) == RESULTADO_TRAMPA and
+		a_exclamation(cadena) == RESULTADO_TRAMPA and
+		a_true(cadena) == RESULTADO_TRAMPA and
+		a_false(cadena) == RESULTADO_TRAMPA and
+		a_punto(cadena) == RESULTADO_TRAMPA and
+		a_apostrofe(cadena) == RESULTADO_TRAMPA and
 		ListaSimbolos(cadena) == RESULTADO_TRAMPA):
 			return True
 
@@ -59,16 +95,71 @@ def TipoCadena(cadena):
 		return "_IF"
 	elif a_else(cadena) == RESULTADO_ACEPTADO:
 		return "_ELSE"
-	#########mas automatas a agregar junto con su tipo
+	elif a_parclose(cadena) == RESULTADO_ACEPTADO:
+		return "_PARCLOSE"
+	elif a_paropen(cadena) == RESULTADO_ACEPTADO:
+		return "_PAROPEN"
+	elif a_comma(cadena) == RESULTADO_ACEPTADO:
+		return "_COMMA"
+	elif a_var(cadena) == RESULTADO_ACEPTADO:
+		return "_VAR"
+	elif a_semicolon(cadena) == RESULTADO_ACEPTADO:
+		return "_SEMICOLON"
+	elif a_igual(cadena) == RESULTADO_ACEPTADO:
+		return "_IGUAL"
+	elif a_for(cadena) == RESULTADO_ACEPTADO:
+		return "_FOR"
+	elif a_return(cadena) == RESULTADO_ACEPTADO:
+		return "_RETURN"
+	elif a_while(cadena) == RESULTADO_ACEPTADO:
+		return "_WHILE"
+	elif a_braopen(cadena) == RESULTADO_ACEPTADO:
+		return "_BRAOPEN"
+	elif a_braclose(cadena) == RESULTADO_ACEPTADO:
+		return "_BRACLOSE"
+	elif a_or(cadena) == RESULTADO_ACEPTADO:
+		return "_OR"
+	elif a_and(cadena) == RESULTADO_ACEPTADO:
+		return "_AND"
+	elif a_equal(cadena) == RESULTADO_ACEPTADO:
+		return "_EQUAL"
+	elif a_different(cadena) == RESULTADO_ACEPTADO:
+		return "_DIFFERENT"
+	elif a_bigger(cadena) == RESULTADO_ACEPTADO:
+		return "_BIGGER"
+	elif a_smaller(cadena) == RESULTADO_ACEPTADO:
+		return "_SMALLER"
+	elif a_smallorequal(cadena) == RESULTADO_ACEPTADO:
+		return "_SMALLOREQUAL"
+	elif a_bigorequal(cadena) == RESULTADO_ACEPTADO:
+		return "_BIGOREQUAL"
+	elif a_guion(cadena) == RESULTADO_ACEPTADO:
+		return "_GUION"
+	elif a_plus(cadena) == RESULTADO_ACEPTADO:
+		return "_PLUS"
+	elif a_slash(cadena) == RESULTADO_ACEPTADO:
+		return "_SLASH"
+	elif a_asterisk(cadena) == RESULTADO_ACEPTADO:
+		return "_ASTERISK"
+	elif a_exclamation(cadena) == RESULTADO_ACEPTADO:
+		return "_EXCLAMATION"
+	elif a_true(cadena) == RESULTADO_ACEPTADO:
+		return "_TRUE"
+	elif a_false(cadena) == RESULTADO_ACEPTADO:
+		return "_FALSE"
+	elif a_punto(cadena) == RESULTADO_ACEPTADO:
+		return "_PUNTO"
+	elif a_apostrofe(cadena) == RESULTADO_ACEPTADO:
+		return "_APOSTROFE"
 
 	else:
-		return "TIPO"
+		return "ID" #En caso de que no sea ninguno de los anteriores creo que entonces es ID.
 
 
 
 ###################################
-#Lexer: voy agarrando elementos de la cadena hasta llegar a un estado trampa.
-#Luego del estado trampa tomo la cadena antes de llegar al estado trampa, examino lo que tengo y devuelvo una lista con: (tipo, cosa leida).
+#Lexer: voy agarrando elementos de la cadena hasta llegar a un estado RESULTADO_TRAMPA.
+#Luego del estado RESULTADO_TRAMPA tomo la cadena antes de llegar al estado RESULTADO_TRAMPA, examino lo que tengo y devuelvo una lista con: (tipo, cosa leida).
 ###################################
 
 
@@ -78,14 +169,18 @@ def lexer(cadena):
 	primerElemento = 0
 	ultimoElemento = 0
 	
+	print("Lexeando: " + cadena)
+	
 	#Repetimos esto hasta leer toda la cadena
 	while ultimoElemento != len(cadena):
 		ultimoElemento += 1
 		subcadena = cadena[primerElemento:ultimoElemento]
 		
-		#examino si lo que leo es trampa en todos los automatas
+		
+		#examino si lo que leo es RESULTADO_TRAMPA en todos los automatas
 		if TodoTrampa(subcadena):
-			#al ser todo trampa, examino lo que es por prioridad, dsp guardo lo leido y su tipo en una lista
+			
+			#al ser todo RESULTADO_TRAMPA, examino lo que es por prioridad, dsp guardo lo leido y su tipo en una lista
 			subcadena = cadena[primerElemento:ultimoElemento-1]
 			tipo = TipoCadena(subcadena)
 			token.append((tipo,subcadena))
@@ -99,6 +194,7 @@ def lexer(cadena):
 
 	#return token
 	print(token)
+	print("\n")
 	
 	
 ###########################################################
@@ -122,7 +218,7 @@ def a_and(cadena):
 
 	for caracter in cadena:
 		estado_proximo = d_and(estado_actual, caracter)
-		if estado_proximo == TRAMPA:
+		if estado_proximo == RESULTADO_TRAMPA:
 			return RESULTADO_TRAMPA
 		estado_actual = estado_proximo
 	
@@ -146,7 +242,7 @@ def a_apostrofe(cadena):
 
 	for caracter in cadena:
 		estado_proximo = d_apostrofe(estado_actual, caracter)
-		if estado_proximo == TRAMPA:
+		if estado_proximo == RESULTADO_TRAMPA:
 			return RESULTADO_TRAMPA
 		estado_actual = estado_proximo
 	
@@ -169,7 +265,7 @@ def a_asterisk(cadena):
 
 	for caracter in cadena:
 		estado_proximo = d_asterisk(estado_actual, caracter)
-		if estado_proximo == TRAMPA:
+		if estado_proximo == RESULTADO_TRAMPA:
 			return RESULTADO_TRAMPA
 		estado_actual = estado_proximo
 	
@@ -193,7 +289,7 @@ def a_bigger(cadena):
 
 	for caracter in cadena:
 		estado_proximo = d_bigger(estado_actual, caracter)
-		if estado_proximo == TRAMPA:
+		if estado_proximo == RESULTADO_TRAMPA:
 			return RESULTADO_TRAMPA
 		estado_actual = estado_proximo
 	
@@ -217,7 +313,7 @@ def a_bigorequal(cadena):
 
 	for caracter in cadena:
 		estado_proximo = d_bigorequal(estado_actual, caracter)
-		if estado_proximo == TRAMPA:
+		if estado_proximo == RESULTADO_TRAMPA:
 			return RESULTADO_TRAMPA
 		estado_actual = estado_proximo
 	
@@ -241,7 +337,7 @@ def a_braclose(cadena):
 
 	for caracter in cadena:
 		estado_proximo = d_braclose(estado_actual, caracter)
-		if estado_proximo == TRAMPA:
+		if estado_proximo == RESULTADO_TRAMPA:
 			return RESULTADO_TRAMPA
 		estado_actual = estado_proximo
 	
@@ -265,7 +361,7 @@ def a_braopen(cadena):
 
 	for caracter in cadena:
 		estado_proximo = d_braopen(estado_actual, caracter)
-		if estado_proximo == TRAMPA:
+		if estado_proximo == RESULTADO_TRAMPA:
 			return RESULTADO_TRAMPA
 		estado_actual = estado_proximo
 	
@@ -289,7 +385,7 @@ def a_comma(cadena):
 
 	for caracter in cadena:
 		estado_proximo = d_comma(estado_actual, caracter)
-		if estado_proximo == TRAMPA:
+		if estado_proximo == RESULTADO_TRAMPA:
 			return RESULTADO_TRAMPA
 		estado_actual = estado_proximo
 	
@@ -313,7 +409,7 @@ def a_different(cadena):
 
 	for caracter in cadena:
 		estado_proximo = d_different(estado_actual, caracter)
-		if estado_proximo == TRAMPA:
+		if estado_proximo == RESULTADO_TRAMPA:
 			return RESULTADO_TRAMPA
 		estado_actual = estado_proximo
 	
@@ -343,7 +439,7 @@ def a_else(cadena):
 
 	for caracter in cadena:
 		estado_proximo = d_else(estado_actual, caracter)
-		if estado_proximo == TRAMPA:
+		if estado_proximo == RESULTADO_TRAMPA:
 			return RESULTADO_TRAMPA
 		estado_actual = estado_proximo
 	
@@ -371,7 +467,7 @@ def a_eof(cadena):
 
 	for caracter in cadena:
 		estado_proximo = d_eof(estado_actual, caracter)
-		if estado_proximo == TRAMPA:
+		if estado_proximo == RESULTADO_TRAMPA:
 			return RESULTADO_TRAMPA
 		estado_actual = estado_proximo
 	
@@ -387,7 +483,7 @@ def d_equal(estado_anterior, caracter):
 		return 2
 
 	
-	return TRAMPA
+	return RESULTADO_TRAMPA
 
 #delta egual
 def d_equal(estado_anterior, caracter):
@@ -397,7 +493,7 @@ def d_equal(estado_anterior, caracter):
 		return 2
 
 	
-	return TRAMPA
+	return RESULTADO_TRAMPA
 
 #automata egual
 def a_equal(cadena):
@@ -406,7 +502,7 @@ def a_equal(cadena):
 
 	for caracter in cadena:
 		estado_proximo = d_equal(estado_actual, caracter)
-		if estado_proximo == TRAMPA:
+		if estado_proximo == RESULTADO_TRAMPA:
 			return RESULTADO_TRAMPA
 		estado_actual = estado_proximo
 	
@@ -430,7 +526,7 @@ def a_exclamation(cadena):
 
 	for caracter in cadena:
 		estado_proximo = d_exclamation(estado_actual, caracter)
-		if estado_proximo == TRAMPA:
+		if estado_proximo == RESULTADO_TRAMPA:
 			return RESULTADO_TRAMPA
 		estado_actual = estado_proximo
 	
@@ -462,7 +558,7 @@ def a_false(cadena):
 
 	for caracter in cadena:
 		estado_proximo = d_false(estado_actual, caracter)
-		if estado_proximo == TRAMPA:
+		if estado_proximo == RESULTADO_TRAMPA:
 			return RESULTADO_TRAMPA
 		estado_actual = estado_proximo
 	
@@ -490,7 +586,7 @@ def a_for(cadena):
 
 	for caracter in cadena:
 		estado_proximo = d_for(estado_actual, caracter)
-		if estado_proximo == TRAMPA:
+		if estado_proximo == RESULTADO_TRAMPA:
 			return RESULTADO_TRAMPA
 		estado_actual = estado_proximo
 	
@@ -518,7 +614,7 @@ def a_fun(cadena):
 
 	for caracter in cadena:
 		estado_proximo = d_fun(estado_actual, caracter)
-		if estado_proximo == TRAMPA:
+		if estado_proximo == RESULTADO_TRAMPA:
 			return RESULTADO_TRAMPA
 		estado_actual = estado_proximo
 	
@@ -542,7 +638,7 @@ def a_guion(cadena):
 
 	for caracter in cadena:
 		estado_proximo = d_guion(estado_actual, caracter)
-		if estado_proximo == TRAMPA:
+		if estado_proximo == RESULTADO_TRAMPA:
 			return RESULTADO_TRAMPA
 		estado_actual = estado_proximo
 	
@@ -566,7 +662,7 @@ def a_if(cadena):
 
 	for caracter in cadena:
 		estado_proximo = d_if(estado_actual, caracter)
-		if estado_proximo == TRAMPA:
+		if estado_proximo == RESULTADO_TRAMPA:
 			return RESULTADO_TRAMPA
 		estado_actual = estado_proximo
 	
@@ -590,7 +686,7 @@ def a_igual(cadena):
 
 	for caracter in cadena:
 		estado_proximo = d_igual(estado_actual, caracter)
-		if estado_proximo == TRAMPA:
+		if estado_proximo == RESULTADO_TRAMPA:
 			return RESULTADO_TRAMPA
 		estado_actual = estado_proximo
 	
@@ -615,7 +711,7 @@ def a_or(cadena):
 
 	for caracter in cadena:
 		estado_proximo = d_or(estado_actual, caracter)
-		if estado_proximo == TRAMPA:
+		if estado_proximo == RESULTADO_TRAMPA:
 			return RESULTADO_TRAMPA
 		estado_actual = estado_proximo
 	
@@ -639,7 +735,7 @@ def a_parclose(cadena):
 
 	for caracter in cadena:
 		estado_proximo = d_parclose(estado_actual, caracter)
-		if estado_proximo == TRAMPA:
+		if estado_proximo == RESULTADO_TRAMPA:
 			return RESULTADO_TRAMPA
 		estado_actual = estado_proximo
 	
@@ -663,7 +759,7 @@ def a_paropen(cadena):
 
 	for caracter in cadena:
 		estado_proximo = d_paropen(estado_actual, caracter)
-		if estado_proximo == TRAMPA:
+		if estado_proximo == RESULTADO_TRAMPA:
 			return RESULTADO_TRAMPA
 		estado_actual = estado_proximo
 	
@@ -685,7 +781,7 @@ def a_plus(cadena):
 
 	for caracter in cadena:
 		estado_proximo = d_plus(estado_actual, caracter)
-		if estado_proximo == TRAMPA:
+		if estado_proximo == RESULTADO_TRAMPA:
 			return RESULTADO_TRAMPA
 		estado_actual = estado_proximo
 	
@@ -707,7 +803,7 @@ def a_punto(cadena):
 
 	for caracter in cadena:
 		estado_proximo = d_punto(estado_actual, caracter)
-		if estado_proximo == TRAMPA:
+		if estado_proximo == RESULTADO_TRAMPA:
 			return RESULTADO_TRAMPA
 		estado_actual = estado_proximo
 	
@@ -742,7 +838,7 @@ def a_return(cadena):
 
 	for caracter in cadena:
 		estado_proximo = d_return(estado_actual, caracter)
-		if estado_proximo == TRAMPA:
+		if estado_proximo == RESULTADO_TRAMPA:
 			return RESULTADO_TRAMPA
 		estado_actual = estado_proximo
 	
@@ -766,7 +862,7 @@ def a_semicolon(cadena):
 
 	for caracter in cadena:
 		estado_proximo = d_semicolon(estado_actual, caracter)
-		if estado_proximo == TRAMPA:
+		if estado_proximo == RESULTADO_TRAMPA:
 			return RESULTADO_TRAMPA
 		estado_actual = estado_proximo
 	
@@ -788,7 +884,7 @@ def a_slash(cadena):
 
 	for caracter in cadena:
 		estado_proximo = d_slash(estado_actual, caracter)
-		if estado_proximo == TRAMPA:
+		if estado_proximo == RESULTADO_TRAMPA:
 			return RESULTADO_TRAMPA
 		estado_actual = estado_proximo
 	
@@ -811,7 +907,7 @@ def a_smaller(cadena):
 
 	for caracter in cadena:
 		estado_proximo = d_smaller(estado_actual, caracter)
-		if estado_proximo == TRAMPA:
+		if estado_proximo == RESULTADO_TRAMPA:
 			return RESULTADO_TRAMPA
 		estado_actual = estado_proximo
 	
@@ -835,7 +931,7 @@ def a_smallorequal(cadena):
 
 	for caracter in cadena:
 		estado_proximo = d_smallorequal(estado_actual, caracter)
-		if estado_proximo == TRAMPA:
+		if estado_proximo == RESULTADO_TRAMPA:
 			return RESULTADO_TRAMPA
 		estado_actual = estado_proximo
 	
@@ -865,7 +961,7 @@ def a_true(cadena):
 
 	for caracter in cadena:
 		estado_proximo = d_true(estado_actual, caracter)
-		if estado_proximo == TRAMPA:
+		if estado_proximo == RESULTADO_TRAMPA:
 			return RESULTADO_TRAMPA
 		estado_actual = estado_proximo
 	
@@ -893,7 +989,7 @@ def a_var(cadena):
 
 	for caracter in cadena:
 		estado_proximo = d_var(estado_actual, caracter)
-		if estado_proximo == TRAMPA:
+		if estado_proximo == RESULTADO_TRAMPA:
 			return RESULTADO_TRAMPA
 		estado_actual = estado_proximo
 	
@@ -925,7 +1021,7 @@ def a_while(cadena):
 
 	for caracter in cadena:
 		estado_proximo = d_while(estado_actual, caracter)
-		if estado_proximo == TRAMPA:
+		if estado_proximo == RESULTADO_TRAMPA:
 			return RESULTADO_TRAMPA
 		estado_actual = estado_proximo
 	
@@ -933,3 +1029,12 @@ def a_while(cadena):
 		return RESULTADO_ACEPTADO
 	else:
 		return RESULTADO_NO_ACEPTADO
+		
+#####################################################################################
+
+lexer("si senior else eof")
+lexer("420 >= 200")
+lexer("if ifno ifyes")
+lexer("")
+lexer("chasquibum")
+lexer(" if ( { } ) else")
