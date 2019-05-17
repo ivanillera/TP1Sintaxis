@@ -32,7 +32,7 @@ def a_bigorequal(cadena):
 
 casos = [
     (">=", RESULTADO_ACEPTADO),
-    (">.", RESULTADO_NO_ACEPTADO),
+    ("", RESULTADO_NO_ACEPTADO),
     ("<", RESULTADO_TRAMPA),
     (" ", RESULTADO_TRAMPA),
     ("=>", RESULTADO_TRAMPA)
