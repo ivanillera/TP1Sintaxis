@@ -18,4 +18,4 @@ Motivo: Hacer un caso de pruebas con listas es innecesariamente complicado.
 Posibles Soluciones:
 - Agregar simbolos desconocidos al lexer (como $,%,&,etc)
 - Terminar de procesar la subcadena cuando se encuentre un espacio (Creo que no es el objetivo de este tp)
-- Hacer que la siguiente subcadena empieze donde se encontraron todos estados trampa, dando como salida las 3 subcadenas: da $ eof (cp-ejemplo de la imagen)
+- Hacer que la siguiente subcadena empieze donde se encontraron todos estados trampa, dando como salida las subcadenas: da $ eof (co-ejemplo de la imagen)
