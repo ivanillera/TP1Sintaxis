@@ -11,7 +11,7 @@ Motivo: Hacer un caso de pruebas con listas es innecesariamente complicado.
 
 ## Errores conocidos:
 
-- Meter un simbolo desconocido hace que el lexer tome la subcadena como trampa, haciendo que saltee ese simbolo y siga con otra subcadena
+- Meter un simbolo desconocido hace que el lexer tome a ese simbolo como trampa en todos los a_automatas(), haciendo que saltee ese simbolo y siga con otra subcadena
 
 ![xd2](https://i.snag.gy/xQrl82.jpg)
 
