@@ -20,6 +20,9 @@ RESULTADO_NO_ACEPTADO = "NO_ACEPTADO"
 
 Digitos = ["0","1","2","3","4","5","6","7","8","9"]
 
+# TODO Pueden utilizar isalpha https://www.tutorialspoint.com/python/string_isalpha.htm
+# para detectar letras
+# y pueden utilizar isdigit para detectar numeros
 Letras = []
 for x in range(97,123):
 	Letras.append(chr(x))
@@ -164,17 +167,23 @@ def TipoCadena(cadena):
 
 
 def lexer(cadena):
-	token = []
+	tokens = []
 	tipo = ""
 	primerElemento = 0
 	ultimoElemento = 0
 	
-	print("Lexeando: " + cadena)
+	####print("Lexeando: " + cadena)
 	
+	# TODO si agregan un espacio o un simbolo especial al final
+	# de la cadena entonces no van a tener problema con el ultimo token
 	#Repetimos esto hasta leer toda la cadena
 	while ultimoElemento != len(cadena):
 		ultimoElemento += 1
 		subcadena = cadena[primerElemento:ultimoElemento]
+		# Para que saltee espacios al incio:
+		if cadena[primerElemento] == " ":
+			primerElemento = primerElemento + 1
+			subcadena = cadena[primerElemento:ultimoElemento]
 		
 		
 		#examino si lo que leo es RESULTADO_TRAMPA en todos los automatas
@@ -183,18 +192,17 @@ def lexer(cadena):
 			#al ser todo RESULTADO_TRAMPA, examino lo que es por prioridad, dsp guardo lo leido y su tipo en una lista
 			subcadena = cadena[primerElemento:ultimoElemento-1]
 			tipo = TipoCadena(subcadena)
-			token.append((tipo,subcadena))
+			tokens.append((tipo,subcadena))
 			
 			primerElemento = ultimoElemento 
-				
+
 		#Esto es lo mismo que arriba porque por alguna razon no pude hacer que la ultma palabra sea examinada por el algoritmo anterior, asi que lo hago aca
 		if ultimoElemento == len(cadena):
 			tipo = TipoCadena(subcadena)
-			token.append((tipo,subcadena))
+			tokens.append((tipo,subcadena))
 
-	#return token
-	print(token)
-	print("\n")
+        
+	return tokens
 	
 	
 ###########################################################
@@ -1032,9 +1040,13 @@ def a_while(cadena):
 		
 #####################################################################################
 
-lexer("si senior else eof")
-lexer("420 >= 200")
-lexer("if ifno ifyes")
-lexer("")
-lexer("chasquibum")
-lexer(" if ( { } ) else")
+# TODO mas pruebas, utilicen todos los posibles tokens
+# especificados en la gramatica
+assert lexer("si senior else eof") == [('ID', 'si'), ('ID', 'senior'), ('_ELSE', 'else'), ('_EOF', 'eof')]
+assert lexer("420 >= 200") == [('ID', '420'), ('_BIGOREQUAL', '>='), ('ID', '200')]
+assert lexer("if ifno ifyes") == [('_IF', 'if'), ('ID', 'ifno'), ('ID', 'ifyes')]
+assert lexer("") == []
+assert lexer("chasquibum") == [('ID', 'chasquibum')]
+assert lexer(" if ( { } ) else") == [('_IF', 'if'), ('_PAROPEN', '('), ('_BRAOPEN', '{'), ('_BRACLOSE', '}'), ('_PARCLOSE', ')'), ('_ELSE', 'else')]
+assert lexer("Hola") == [("ID", "Hola")]
+assert lexer("fun funo if for else return whileo while") == [('ID', 'fun'), ('ID', 'funo'), ('_IF', 'if'), ('_FOR', 'for'), ('_ELSE', 'else'), ('_RETURN', 'return'), ('ID', 'whileo'), ('_WHILE', 'while')]
