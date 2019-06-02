@@ -22,7 +22,7 @@ Digitos = ["0","1","2","3","4","5","6","7","8","9"]
 
 # TODO Pueden utilizar isalpha https://www.tutorialspoint.com/python/string_isalpha.htm
 # para detectar letras
-# y pueden utilizar isdigit para detectar numeros
+# y pueden utilizar isdigit para detectar numeros <-- DONE
 Letras = []
 for x in range(97,123):
 	Letras.append(chr(x))
@@ -32,12 +32,12 @@ for x in range(65,91):
 	Letras.append("Ñ")
 
 def Letra(caracter):
-	if not caracter in Letras or len(caracter) == 0:
+	if not caracter.isalpha() or len(caracter) == 0:
 		return RESULTADO_TRAMPA
 	return RESULTADO_ACEPTADO
 	
 def Digito(caracter):
-	if not caracter in Digitos or len(caracter) == 0:  
+	if not caracter.isdigit() or len(caracter) == 0:
 		return RESULTADO_TRAMPA
 	return RESULTADO_ACEPTADO
 
@@ -172,19 +172,17 @@ def lexer(cadena):
 	primerElemento = 0
 	ultimoElemento = 0
 	
-	####print("Lexeando: " + cadena)
-	
-	# TODO si agregan un espacio o un simbolo especial al final
+	# TODO si agregan un espacio o un simbolo especial al final <-- DONE
 	# de la cadena entonces no van a tener problema con el ultimo token
 	#Repetimos esto hasta leer toda la cadena
 	while ultimoElemento != len(cadena):
 		ultimoElemento += 1
 		subcadena = cadena[primerElemento:ultimoElemento]
+	
 		# Para que saltee espacios al incio:
 		if cadena[primerElemento] == " ":
 			primerElemento = primerElemento + 1
 			subcadena = cadena[primerElemento:ultimoElemento]
-		
 		
 		#examino si lo que leo es RESULTADO_TRAMPA en todos los automatas
 		if TodoTrampa(subcadena):
@@ -196,12 +194,14 @@ def lexer(cadena):
 			
 			primerElemento = ultimoElemento 
 
-		#Esto es lo mismo que arriba porque por alguna razon no pude hacer que la ultma palabra sea examinada por el algoritmo anterior, asi que lo hago aca
-		if ultimoElemento == len(cadena):
-			tipo = TipoCadena(subcadena)
-			tokens.append((tipo,subcadena))
+	#  Borrado por #TODO anterior, agregamos espacio a cada cadena así no da error.
+	#Esto es lo mismo que arriba porque por alguna razon no pude hacer que la ultma palabra sea examinada por el algoritmo anterior, asi que lo hago aca
+	#	if ultimoElemento == len(cadena):
+	#		tipo = TipoCadena(subcadena)
+	#		tokens.append((tipo,subcadena))
 
         
+	
 	return tokens
 	
 	
@@ -1042,11 +1042,11 @@ def a_while(cadena):
 
 # TODO mas pruebas, utilicen todos los posibles tokens
 # especificados en la gramatica
-assert lexer("si senior else eof") == [('ID', 'si'), ('ID', 'senior'), ('_ELSE', 'else'), ('_EOF', 'eof')]
-assert lexer("420 >= 200") == [('ID', '420'), ('_BIGOREQUAL', '>='), ('ID', '200')]
-assert lexer("if ifno ifyes") == [('_IF', 'if'), ('ID', 'ifno'), ('ID', 'ifyes')]
+assert lexer("si senior else eof ") == [('ID', 'si'), ('ID', 'senior'), ('_ELSE', 'else'), ('_EOF', 'eof')]
+assert lexer("420 >= 200 ") == [('ID', '420'), ('_BIGOREQUAL', '>='), ('ID', '200')]
+assert lexer("if ifno ifyes ") == [('_IF', 'if'), ('ID', 'ifno'), ('ID', 'ifyes')]
 assert lexer("") == []
-assert lexer("chasquibum") == [('ID', 'chasquibum')]
-assert lexer(" if ( { } ) else") == [('_IF', 'if'), ('_PAROPEN', '('), ('_BRAOPEN', '{'), ('_BRACLOSE', '}'), ('_PARCLOSE', ')'), ('_ELSE', 'else')]
-assert lexer("Hola") == [("ID", "Hola")]
-assert lexer("fun funo if for else return whileo while") == [('ID', 'fun'), ('ID', 'funo'), ('_IF', 'if'), ('_FOR', 'for'), ('_ELSE', 'else'), ('_RETURN', 'return'), ('ID', 'whileo'), ('_WHILE', 'while')]
+assert lexer("chasquibum ") == [('ID', 'chasquibum')]
+assert lexer(" if ( { } ) else ") == [('_IF', 'if'), ('_PAROPEN', '('), ('_BRAOPEN', '{'), ('_BRACLOSE', '}'), ('_PARCLOSE', ')'), ('_ELSE', 'else')]
+assert lexer("Hola ") == [("ID", "Hola")]
+assert lexer("fun funo if for else return whileo while ") == [('ID', 'fun'), ('ID', 'funo'), ('_IF', 'if'), ('_FOR', 'for'), ('_ELSE', 'else'), ('_RETURN', 'return'), ('ID', 'whileo'), ('_WHILE', 'while')]
