@@ -1040,7 +1040,7 @@ def a_while(cadena):
 		
 #####################################################################################
 
-# TODO mas pruebas, utilicen todos los posibles tokens
+# TODO mas pruebas, utilicen todos los posibles tokens <-- DONE
 # especificados en la gramatica
 assert lexer("si senior else eof ") == [('ID', 'si'), ('ID', 'senior'), ('_ELSE', 'else'), ('_EOF', 'eof')]
 assert lexer("420 >= 200 ") == [('ID', '420'), ('_BIGOREQUAL', '>='), ('ID', '200')]
@@ -1050,3 +1050,7 @@ assert lexer("chasquibum ") == [('ID', 'chasquibum')]
 assert lexer(" if ( { } ) else ") == [('_IF', 'if'), ('_PAROPEN', '('), ('_BRAOPEN', '{'), ('_BRACLOSE', '}'), ('_PARCLOSE', ')'), ('_ELSE', 'else')]
 assert lexer("Hola ") == [("ID", "Hola")]
 assert lexer("fun funo if for else return whileo while ") == [('ID', 'fun'), ('ID', 'funo'), ('_IF', 'if'), ('_FOR', 'for'), ('_ELSE', 'else'), ('_RETURN', 'return'), ('ID', 'whileo'), ('_WHILE', 'while')]
+assert lexer("true verdad elsetrue false ") == [('_TRUE', 'true'), ('ID', 'verdad'), ('ID', 'elsetrue'), ('_FALSE', 'false')]
+assert lexer(". ' <= and or y o' ") == [('_PUNTO', '.'), ('_APOSTROFE', "'"), ('_SMALLOREQUAL', '<='), ('_AND', 'and'), ('_OR', 'or'), ('ID', 'y'), ('ID', 'o')]
+assert lexer("== = == , var variable ; ") == [('_EQUAL', '=='), ('_IGUAL', '='), ('_EQUAL', '=='), ('_COMMA', ','), ('_VAR', 'var'), ('ID', 'variable'), ('_SEMICOLON', ';')]
+assert lexer("hola + 2 = 3 <> { } asd ") == [('ID', 'hola'), ('_PLUS', '+'), ('ID', '2'), ('_IGUAL', '='), ('ID', '3'), ('_SMALLER', '<'), ('_BRAOPEN', '{'), ('_BRACLOSE', '}'), ('ID', 'asd')]
